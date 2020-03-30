@@ -145,6 +145,6 @@ const showSpinner = new Observable(() => {
 - Import loading spinner.
   - (implementation doesn't matter for this. it's just a spinner we are importing.)
 - `Observable` accepts a callback that will be invoked anytime the `Observable` is subscribed to
-  - we put the code to show our spinner inside this callback on our `showSpinner` `Observable`
+  - We put the code to show our spinner inside this callback on our `showSpinner` `Observable`
 - Then we put a return inside the `Observable` callback, which will be invoked when the `observable`d is unsubscribed from
   - We put the code to hide the spinner inside this return
