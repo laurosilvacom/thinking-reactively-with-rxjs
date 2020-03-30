@@ -1,4 +1,4 @@
-# Course Intro
+# 01. Course Intro
 
 #### [📹 Video](https://egghead.io/lessons/rxjs-break-down-a-requirement-into-small-problems)
 
