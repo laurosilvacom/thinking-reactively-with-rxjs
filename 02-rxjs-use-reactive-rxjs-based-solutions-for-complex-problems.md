@@ -11,11 +11,11 @@
 
 ## Transcript
 
-[00:00](https://egghead.io/lessons/rxjs-use-reactive-rxjs-based-solutions-for-complex-problems#t=0) Whenever I have to build a new feature, or I get a requirement specification, the decision of whether to use RxJS depends on two things for me. Do I need to worry about timing? An example can be as simple as, does it involve async operations? Or even as straightforward as, we need to wait three seconds before making an HTTP request.
+- [00:00](https://egghead.io/lessons/rxjs-use-reactive-rxjs-based-solutions-for-complex-problems#t=0) Whenever I have to build a new feature, or I get a requirement specification, the decision of whether to use RxJS depends on two things for me. Do I need to worry about timing? An example can be as simple as, does it involve async operations? Or even as straightforward as, we need to wait three seconds before making an HTTP request.
 
-[00:20](https://egghead.io/lessons/rxjs-use-reactive-rxjs-based-solutions-for-complex-problems#t=20) The second question I ask myself is, do we need to coordinate a lot of events that might be of different types like clicks or HTTP requests or even _setTimeouts_? Again, an example can be wait for the user to click login then make a pull request. Then when that's done, we direct to the account page.
+- [00:20](https://egghead.io/lessons/rxjs-use-reactive-rxjs-based-solutions-for-complex-problems#t=20) The second question I ask myself is, do we need to coordinate a lot of events that might be of different types like clicks or HTTP requests or even _setTimeouts_? Again, an example can be wait for the user to click login then make a pull request. Then when that's done, we direct to the account page.
 
-[00:40](https://egghead.io/lessons/rxjs-use-reactive-rxjs-based-solutions-for-complex-problems#t=40) To even more complex examples like building a typeahead component where we need to coordinate the user hitting the keyboard with how much time has passed since the last keystroke with making a request to the server to search.
+- [00:40](https://egghead.io/lessons/rxjs-use-reactive-rxjs-based-solutions-for-complex-problems#t=40) To even more complex examples like building a typeahead component where we need to coordinate the user hitting the keyboard with how much time has passed since the last keystroke with making a request to the server to search.
 
 [00:53](https://egghead.io/lessons/rxjs-use-reactive-rxjs-based-solutions-for-complex-problems#t=53) This is the app we'll be working with. When we click these buttons, we trigger some tasks in the background. Imagine slow HTTP request if you want.
 
