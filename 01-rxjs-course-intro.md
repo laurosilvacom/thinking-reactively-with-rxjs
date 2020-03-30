@@ -14,7 +14,8 @@
 ## Transcript
 
 - [00:00](https://egghead.io/lessons/rxjs-course-intro#t=0) Hi, all. Radesh here. I'm very excited to be able to finally walk you through what I've been working on for the past few months.
-  00:07 There are certain scenarios which really lend themselves to a reactive solution where you program and think according to what events could happen in your app. They mainly involve the passage of time and the coordination of multiple types of events. The difficulties these scenarios pose have a way to compound as software evolves.
+
+- [00:07]() There are certain scenarios which really lend themselves to a reactive solution where you program and think according to what events could happen in your app. They mainly involve the passage of time and the coordination of multiple types of events. The difficulties these scenarios pose have a way to compound as software evolves.
 
 - [00:29](https://egghead.io/lessons/rxjs-course-intro#t=7) The moment you have to think about the passage of time to solve a seemingly small problem, there's a very big chance that any future changes to that requirement will also involve time and coordination of events, especially on the front end where you have the biggest source of random events, the user itself.
 
