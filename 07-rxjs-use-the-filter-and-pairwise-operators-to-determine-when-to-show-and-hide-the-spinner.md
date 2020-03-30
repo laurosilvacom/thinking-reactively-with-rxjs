@@ -11,7 +11,7 @@
 
 ## Transcript
 
-[0:00]() We solved this problem and now we can move up one floor of obstruction. I'll copy this to our source page, and I'll copy this comment over here, just to mark that we're moving up one level of obstruction in our code as well. We're building an observable that's going to answer this question. Let's name it accordingly.
+- [0:00]() We solved this problem and now we can move up one floor of obstruction. I'll copy this to our source page, and I'll copy this comment over here, just to mark that we're moving up one level of obstruction in our code as well. We're building an observable that's going to answer this question. Let's name it accordingly.
 
 ### TaskProgressService.js
 
@@ -27,7 +27,7 @@ const shouldHideSpinner =
 export default {};
 ```
 
-[0:22]() When the count of async tasks goes, we'll start with our `currentLoadCount` and once that goes to 0, we want to emit. I'll `pipe()` this to the `filter()` operator. We'll just go to the top and `import` it. It's only going to let values through that are 0.
+- [0:22]() When the count of async tasks goes, we'll start with our `currentLoadCount` and once that goes to 0, we want to emit. I'll `pipe()` this to the `filter()` operator. We'll just go to the top and `import` it. It's only going to let values through that are 0.
 
 ### TaskProgressService.js
 
@@ -54,9 +54,9 @@ const shouldHideSpinner = currentLoadCount.pipe(
 )
 ```
 
-[0:38]() We don't care that this (`shouldHideSpinner`) emits 0. We don't care what it emits. We just care when it emits because that's the time to hide the spinner.
+- [0:38]() We don't care that this (`shouldHideSpinner`) emits 0. We don't care what it emits. We just care when it emits because that's the time to hide the spinner.
 
-[0:46]() Let's pick our second requirement. I'll just paste it here. Now we'll build an _Observable_ that answers this question, . We'll name it `shouldShowSpinner`. Again, we need to listen to the count. We'll `pipe()` this to a `filter()` function again that will only let emissions go through when the load is 1.
+- [0:46]() Let's pick our second requirement. I'll just paste it here. Now we'll build an _Observable_ that answers this question, . We'll name it `shouldShowSpinner`. Again, we need to listen to the count. We'll `pipe()` this to a `filter()` function again that will only let emissions go through when the load is 1.
 
 ```js
 /*

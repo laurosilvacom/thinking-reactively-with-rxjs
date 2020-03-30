@@ -11,25 +11,25 @@
 
 ## Transcript
 
-[0:00]() We'll take a quick break from building our app to look at this. An `emissions` _Observable_ that emits a one anytime we click on this button (`emitButton`). If we look at the console here, when we click on `EMIT`, we get an emission. We `pipe()` these emissions to a `scan()` that adds up the numbers in the same way we've been doing in our app.
+- [0:00]() We'll take a quick break from building our app to look at this. An `emissions` _Observable_ that emits a one anytime we click on this button (`emitButton`). If we look at the console here, when we click on `EMIT`, we get an emission. We `pipe()` these emissions to a `scan()` that adds up the numbers in the same way we've been doing in our app.
 
 ### Emit Button
 
 ![App Example - Emit Button](https://res.cloudinary.com/dg3gyk0gu/image/upload/v1585168509/transcript-images/egghead-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators-emit-button.jpg)
 
-[0:18]() If we click multiple times, we get increasing values. We `.subscribe()` to this here, hence why we get the console logs. Have a look at this, if I click this button here (`add second subscriber`), it will add a new subscriber to our source. This is the callback where we actually subscribe.
+- [0:18]() If we click multiple times, we get increasing values. We `.subscribe()` to this here, hence why we get the console logs. Have a look at this, if I click this button here (`add second subscriber`), it will add a new subscriber to our source. This is the callback where we actually subscribe.
 
 ### Add Second Subscriber
 
 ![App Example - Add Second Subscriber](https://res.cloudinary.com/dg3gyk0gu/image/upload/v1585168507/transcript-images/egghead-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators-add-second-subscriber.jpg)
 
-[0:33]() If you click on `EMIT` now, we can see that our first subscriber got an expected state, the number four, but our second subscriber got a number one which is the initial state. `scan()` actually keeps a brand new state for each subscriber.
+- [0:33]() If you click on `EMIT` now, we can see that our first subscriber got an expected state, the number four, but our second subscriber got a number one which is the initial state. `scan()` actually keeps a brand new state for each subscriber.
 
 ### Unexpected Output
 
 ![App Example - Unexpected Output](https://res.cloudinary.com/dg3gyk0gu/image/upload/v1585168506/transcript-images/egghead-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators-unexpected-output.jpg)
 
-[0:48]() Another way you can think about this is what type of status can hold it? Is it transient? Do we want to reset it per subscription? We'll see an example of this later on in our app. Is it a single source of truth that is shareable across all subscribers? A Redux store would be a good example of this. It's shared and you definitely don't want it to reset per subscription.
+- [0:48]() Another way you can think about this is what type of status can hold it? Is it transient? Do we want to reset it per subscription? We'll see an example of this later on in our app. Is it a single source of truth that is shareable across all subscribers? A Redux store would be a good example of this. It's shared and you definitely don't want it to reset per subscription.
 
 [1:12]() Let's add the `share()` operator after our `scan()`. We emit only to the first subscriber initially. Once we bring in the second subscriber and then we emit, we get the same state for both of them now.
 
