@@ -8,3 +8,5 @@
 
 - There are certain scenarios that really **lend themselves to a reactive solution** - and they mainly **involve the passage of time and the coordination of multiple asynchronous events**.
 - In this lesson we'll look at some examples and introduce our first problem: how do we **show a spinner** on the screen when there are tasks happening in the background?
+
+## Transcript

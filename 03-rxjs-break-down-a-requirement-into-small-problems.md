@@ -7,3 +7,5 @@
 ## Summary
 
 - We will introduce our first requirement: **showing a loading spinner immediately when tasks are going on in the background**. We will then break this requirement into more and more specific english sentences, which we will later turn into actual observable stream.
+
+## Transcript

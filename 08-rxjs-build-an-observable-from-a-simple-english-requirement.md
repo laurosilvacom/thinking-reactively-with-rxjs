@@ -7,3 +7,5 @@
 ## Summary
 
 - Having built all the event streams we need, **we can now assemble them and generate the observable equivalent of our main requirement sentence**: _“When the loader needs to show, show the loader, until it’s time to hide it”_.
+
+## Transcript

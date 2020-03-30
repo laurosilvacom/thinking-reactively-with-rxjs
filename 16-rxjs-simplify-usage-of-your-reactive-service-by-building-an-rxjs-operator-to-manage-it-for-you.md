@@ -8,3 +8,5 @@
 
 - While we’ve made sure to **expose our spinner service using simple, external APIs, most of the time, it will be called in the same way, from observables and promises**.
 - In this lesson, we will be creating an RxJS operator that be easily plugged in to different observables to track them via the spinner.
+
+## Transcript

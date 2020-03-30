@@ -7,3 +7,5 @@
 ## Summary
 
 - We will create a Promise wrapper, that can be used instead of normal promises, to track different tasks that we need to show the spinner for.
+
+## Transcript
