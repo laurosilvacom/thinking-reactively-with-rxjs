@@ -290,3 +290,52 @@ function keyCombo(keyCombo) {
 - [08:08](https://egghead.io/lessons/rxjs-build-an-event-combo-observable#t=488) To recap, we spent time to really understand our requirement and break it down into small problems that are defined as simple English sentences. We then separated our combo starting condition from the rest of the logic as that allows us to think in isolation and focus just on the question of what actually terminates the combo.
 
 - [08:30](https://egghead.io/lessons/rxjs-build-an-event-combo-observable#t=510) We then learned about the various take operators and how they can be used to dispose of the source when different events happen.
+
+# Personal Take
+
+### Combo Observable
+
+**New Requirement:** Disable spinner when a certain combination of keys has been pressed (to facilitate testing, etc)
+
+- Whenever someone starts pressing the key combo, listen for them to complete the rest of the combo
+- keep listening until the timer for listening has run out or a user presses an incorrect key
+- stop listening when they complete the key combo (got combo.length - 1 key presses back)
+
+```js
+    const anyKeyPresses = fromEvent(document, 'keypress').pipe(
+    	map.(event = event.key)
+    )
+
+    function keyPressed(key) {
+    	return anyKeyPresses.pipe(filter(pressedKey => pressedKey === key))
+    }
+
+    function keyCombo(keyCombo) {
+    	const comboInitiator = keyCombo[0]
+    	return keyPressed(comboInitiator).pipe(
+    		switchMap(() => {
+    			//WE ARE NOW IN COMBO MODE
+    			return anyKeyPresses.pipe(
+    				takeUntil(timer(3000))
+    				takeWhile((keyPressed, index) => keyCombo[index+1] === keyPressed)
+    				skip(keyCombo.length - 2)
+    				take(1)
+    			)
+    		})
+    	)
+    }
+
+    const comboTriggered = keyCombo(['a','s','d','f'])
+
+    interval(1000).pipe(
+    	takeUntil(comboTriggered)
+    ).subscribe({
+    	next: x => console.log(x),
+    	complete: () => console.log('COMPLETED')
+    })
+```
+
+**RECAP:**
+
+- separate combo starting condition from the rest of our logic
+- use various `take` operators to listen and dispose of the event listener based on various parameters

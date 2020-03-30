@@ -55,3 +55,18 @@ export default {};
 ```
 
 - [02:21](https://egghead.io/lessons/rxjs-break-down-a-requirement-into-small-problems#t=141) The great thing about breaking down our problems into small chunks like we did with the floors of our building is that we can define placeholders for any unknown sources and assume they already exist. This keeps us focused on solving our problem, one floor at a time.
+
+## Personal Take
+
+### Breaking Down the Problem:
+
+- Show a spinner...until we hide it...
+  - When does the loader show? When the count of async tasks goes from 0 to 1
+  - When does the loader hide? When the count goes back to 0
+- Define when an async task starts
+- Define when an async task ends
+- What does "show spinner" even mean!?
+
+**Start with simple definitions:** `taskStarts`, `taskCompletions`, `showSpinner` as `Observable()`
+
+remember to `import { Observable } from 'rxjs'`

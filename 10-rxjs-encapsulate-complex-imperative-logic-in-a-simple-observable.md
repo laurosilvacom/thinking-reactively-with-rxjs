@@ -137,3 +137,14 @@ const showSpinner = new Observable(() => {
 - [03:12](https://egghead.io/lessons/rxjs-encapsulate-complex-imperative-logic-in-a-simple-observable#t=192) Let's try that again. I'll save it, I'll start a few tasks and you can see that once they start going down and they reach zero, our spinner disappears now.
 
 - [03:23](https://egghead.io/lessons/rxjs-encapsulate-complex-imperative-logic-in-a-simple-observable#t=203) To recap, we've seen how to wrap complex JavaScript-based logic inside an observer primitive where we took full advantage of its setup and tear down mechanics. It fits in neatly within our streams that switches to it whenever it's time to show the spinner and disposes of it whenever it's time to hide it.
+
+# Personal Take
+
+### Display and Hide the Spinner:
+
+- import loading spinner.
+  - (implementation doesn't matter for this. it's just a spinner we are importing.)
+- `Observable` accepts a callback that will be invoked anytime the `Observable` is subscribed to
+  - we put the code to show our spinner inside this callback on our `showSpinner` `Observable`
+- then we put a return inside the `Observable` callback, which will be invoked when the `observable`d is unsubscribed from
+  - we put the code to hide the spinner inside this return

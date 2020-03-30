@@ -101,3 +101,55 @@ const currentLoadCount = loadVariations.pipe(
 - [02:28](https://egghead.io/lessons/rxjs-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator#t=148) Just to quickly go back and recap, the moment the task starts, it will get mapped to a number one so `loadVariations` will limit to one, which will in turn increase the count by one. If a task ends, it will get mapped to a `-1`, so `loadVariations` will emit the `-1` which will decrease our count by one.
 
 - [02:45](https://egghead.io/lessons/rxjs-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator#t=165) We started from some very raw streams, and we used those to create two more specialized streams. Then we combined those to create an even more useful stream, all the way up to this. A stream that whenever somebody subscribes to it, they'll get the current number of loads in our application.
+
+# Personal Take
+
+### First Problem:
+
+How Do we Count?
+
+- Start count from zero
+- when an async task starts, increase count by 1
+- when a task ends, decrease count by 1
+
+Create a `loadUp` and `loadDown` `Observable` to emit 1 and -1 when tasks start or complete, using mapTo:
+
+- `import { mapTo } from 'rxjs/operators'` , because we will be using `pipe`
+- `const loadUp = taskStarts.pipe(mapTo(1))`
+- `const loadDown = taskCompletions.pipe(mapTo(-1))`
+
+import `merge` from rxjs to create a new `Observable`
+
+- `const loadVariations = merge(loadUp, loadDown)` creates new `Observable` that combines the two
+
+`**loadVariations` is now all we need to solve our problem!\*\*
+
+Cognitive demand is much lower when we only need to deal with fewer pieces of information, and they are intelligently designed/named so that we can easily understand what they do (re: the naming convention of `loadUp`, `loadDown` and `loadVariations`.
+
+We can consider our problem solved if: we have an `observable` that gives the `currentLoadCount` of tasks in our app. So lets make it!
+
+    const currentLoadCount = loadVariations.pipe(
+    	scan((totalCurrentLoads, changeInLoads) => {
+    		return totalCurrentLoads + changeInLoads;
+    }, 0)
+
+- `scan` should be imported from `rxjs/operators`, and accepts the same parameters as `reduce` in JS, including the starting value after the function (which is `0` here)
+
+We need to make `currentLoadCount` work as predictably as possible.
+
+_Good abstractions are predicatable_
+
+We won't get anything until `currentLoadCount` emits something, so we need it to initially emit `0`
+
+To accomplish this:
+
+- import `startWith` from `rxjs/operators`
+- add `startWith` to our `currentLoadCount` function like this:
+
+  const currentLoadCount = loadVariations.pipe(
+  startWith(0);
+  scan((totalCurrentLoads, changeInLoads) => {
+  return totalCurrentLoads + changeInLoads;
+  })
+
+  _We can now remove our starting value `0`, and let our `startsWith(0)` flow through the `scan` function to return `0` initially_

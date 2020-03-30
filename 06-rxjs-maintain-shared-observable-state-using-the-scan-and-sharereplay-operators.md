@@ -85,3 +85,24 @@ const currentLoadCount = loadVariations.pipe(
   shareReplay({bufferSize: 1, refCount: true})
 )
 ```
+
+# Personal Take
+
+### -Quick Break-
+
+- Taking a look at an emitter similar to our app, we can see that `scan` will keep separate states for separate subscribers, allowing us to return a running total for each subscriber
+- Another way to consider this:
+  - what state is `scan` holding?
+    - transient?
+    - a single source of truth?
+  - Can add `share()` to give each subscriber the same value, but we don't get the current value when we add a subscriber
+  - If we instead use `shareReplay(1)`, we get the current value only for the added subscriber, and then we continue to increment thereafter, for each added subscriber
+  - **Problem:** default of `shareReplay` will keep a subscription source "alive" in the background which will keep racking up values, even after everything has unsubscribed from it
+    - to fix this we can alter `shareReplay` :
+      - `shareReplay({ bufferSize: 1, refCount: true })`
+      - `refCount` will keep a reference of our subscribers, and when the number of subs drops to zero, it drops its source.
+
+### Back to Our App...
+
+- Our `currentLoadCount` is a single source of truth, so we _do not_ want to keep a background task count.
+- Add `shareReplay` the same as above at the end of the `currentLoadCount` function

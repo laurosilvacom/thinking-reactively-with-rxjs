@@ -229,3 +229,59 @@ const spinnerWithStats = loadStats.pipe(
 - [06:46](https://egghead.io/lessons/rxjs-maintain-self-resetting-state-in-your-observable-streams-using-the-scan-operator#t=382) Takeaways from this, so if you have state and that state needs to be reset, say, when this goes back down to zero, consider the life cycle of the _Observable_ _scan()_ belongs to rather than manually resetting it. This is powerful, because we can focus on what this _Observable_ does, which is tracking the loading stats, and not have to worry about when to clean up and do the resets.
 
 - [07:09](https://egghead.io/lessons/rxjs-maintain-self-resetting-state-in-your-observable-streams-using-the-scan-operator#t=429) In this case, we found another _Observable_ that it had to share some life cycle with, and we just combined them into this other stream. It's at this upper level where we decide its life cycle, and with it, the clean-up of the state.
+
+# Personal Take
+
+### Percentage Progress Indicator...
+
+- First we need to really understand the problem...
+
+  - Imagine an array of running tasks...
+    - as tasks in the array complete, the percentage completed goes up
+    - if we add more tasks to the array while other tasks are still loading, the _total percentage completed_ goes back down
+    - then as more tasks complete the percentage goes back up until all tasks have completed
+
+  **How do we show this on screen??**
+
+- our `initLoadingSpinner` (from our spinner library) takes two arguments: `total` and `completed`
+- if we assign `6` to `total` and `5` to `completed`, we see a display of 83% when the spinner appears...
+
+**How do we make these numbers dynamic?**
+
+- First, wrap this observable in a function that accepts these two variables as arguments
+- If our tasks are an array, we can use the `.length` of the array as the total, and then calculated based on how many have completed, and how many have yet to load...
+- We can use `currentLoadCount` to find this out...
+  - when this count goes up, we have more loading
+  - when this count goes down, it indicates that a task has completed
+- Define a `loadStats` observable to track changes in loading tasks, with initial values set to 0
+
+```js
+const loadStats = currentLoadCount.pipe(
+  scan(
+    (loadStats, loadingUpdate) => {
+      const loadsWentDown = loadingUpdate < loadStats.previousLoading;
+      const currentCompleted = loadsWentDown
+        ? loadStats.completed + 1
+        : loadStats.completed;
+      return {
+        total: currentCompleted + loadingUpdate,
+        completed: currentCompleted,
+        previousLoadingCount: loadingUpdate
+      };
+    },
+    { total: 0, completed: 0, previousLoadingCount: 0 }
+  )
+);
+```
+
+**Now what happens when all tasks complete?**
+
+- We need to reset `total` and `completed` back to `0`
+- It turns out we don't have to think about resetting our stats...
+- We can tie the lifecycle of our `spinner` and `loadStats` together, so that both will be created and disposed of together
+
+  const spinnerWithStats = loadStats.pipe(
+  switchMap( stats => showSpinner(stats.total, stats.completed))
+  )
+
+- This ensures that the `loadStats` state is local to the instance of spinner that it is tied to

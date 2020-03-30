@@ -118,3 +118,23 @@ const shouldShowSpinner = spinnerActivated.pipe(
 - [02:52](https://egghead.io/lessons/rxjs-extend-your-reactive-logic-using-observable-like-proxies-that-delay-or-drop-events#t=156) It had two clear inputs that were already answered by these questions and it had a very clear output to our top-level requirement. All of that translated perfectly into our code as well.
 
 - [03:03](https://egghead.io/lessons/rxjs-extend-your-reactive-logic-using-observable-like-proxies-that-delay-or-drop-events#t=183) Because we created well-encapsulated building blocks, we could simply declare another well-defined building block and insert it kind of like a proxy between these sources (`spinnerDeactivated/spinnerActivated`) and our top-level consumer (`shouldShowSpinner`). Our proxy simply responds to events from this (`spinnerActivated`), delaying them as necessary and fires them to the next block on the chain.
+
+# Personal Take
+
+### **What if our async call is too quick to show the spinner?**
+
+- if an async call resolves too quickly the action of showing the spinner will appear as a glitch
+- we should only show the spinner once it's been active for at least 2 seconds... but how?
+
+**New Abstraction:** When the spinner becomes active, wait for 2 seconds before showing it. BUT cancel showing it, if it becomes inactive again in the meantime.
+
+**When does the spinner need to show?**
+
+- Rename `shouldHideSpinner` to `spinnerDeactivated` and rename `shouldShowSpinner` to `spinnerActivated` to be more indicative of what they actually do (_replace any usage of these functions in the rest of your code!)_
+- New `shouldShowSpinner` function:
+
+  const shouldShowSpinner = spinnerActivated.pipe(
+  switchMap(() => timer(2000).pipe(takeUntil(spinnerDeactivated)))
+  )
+
+- Now the spinner will wait for 2 seconds before showing, and will not show when the action is too quick to warrant it

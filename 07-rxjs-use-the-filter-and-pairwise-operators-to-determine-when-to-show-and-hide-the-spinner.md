@@ -124,3 +124,40 @@ const shouldShowSpinner = currentLoadCount.pipe(
 ```
 
 [2:01]() Even though we could have done this with `scan()`, with `pairwise()` we signal our intent much better to other developers reading this. The more operators we know, the bigger the chance that we're going to find a nicely named obstruction that signifies intent much better than a custom solution.
+
+# Personal Take
+
+### **Now we can move up a layer in abstraction...**
+
+- When does our loader need to hide/show?
+  - hide when the async count gets to `0`
+  - show when the async count goes from `0` to `1`
+
+Let's name our `Observable` accordingly: `shouldHideSpinner`
+
+- we import the `filter` operator and use `pipe` to pass it to the current load count, and check that the count is equal to `0`
+
+  const shouldHideSpinner = currentLoadCount.pipe(
+  filter(count => count === 0);
+  );
+
+Now we can check when to **show \*\***our spinner...
+
+- again, we name accordingly: `shouldShowSpinner`
+- again, we listen on the `currentLoadCount`
+- and again, we use `filter`
+
+We _could_ filter and return any time the `count` is equal to `1`, but that's not really right
+
+_what about when the count goes from 2 to 1? We don't need to show the spinner again. We just need to know when to show the spinner initially, when the count goes from 0 to 1._
+
+So, we need to keep track of the previous count... But how?
+
+- We can import the `pairwise` operator, which emits the previous and current count.
+
+Here is our final `shouldShowSpinner` function:
+
+    const shouldShowSpinner = currentLoadCount.pipe(
+    	pairwise();
+    	filter(([prevCount, currCount]) => prevCount === 0 && currCount === 1)
+    )

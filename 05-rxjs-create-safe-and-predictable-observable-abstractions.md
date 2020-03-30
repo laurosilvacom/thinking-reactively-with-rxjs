@@ -62,3 +62,17 @@ const currentLoadCount = loadVariations.pipe(
   distinctUntilChanged()
 )
 ```
+
+# Personal Take
+
+### What happens if we get more `taskCompletions` than `taskStarts`?
+
+_This shouldn't happen_, but we can safeguard against this anyway by changing the function to check if `newLoadCount` is `< 0` and return `0` if it is, to prevent going into the negative.
+
+BUT then we might emit `0` over and over!
+
+**RxJS to the rescue!**
+
+- import `distinctUntilChanged` from `rxjs/operators`
+- place this at the very end of `currentLoadCount`
+- this will filter subsequent values that are equal (like repeating `0`s)
