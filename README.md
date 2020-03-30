@@ -21,9 +21,14 @@ Follow the thought process that Rares uses as he breaks problems down into manag
 - [Introduction to Reactive Programming](https://egghead.io/courses/introduction-to-reactive-programming)
 - [RxJS Beyond the Basics: Operators in Depth](https://egghead.io/courses/rxjs-beyond-the-basics-operators-in-depth)
 
+## Important
+
+- 🚧The code we will learn/write during the lesson is in: `src/lesson-code`.
+- View [example deployment here](https://vigilant-visvesvaraya-945613.netlify.com). best viewed on a phone screen (`F12` in Chrome, then `CMD+SHIFT+M)`.
+
 ## Table of Contents
 
-- [01. Course Intro](01-rxjs-course-intro)
+- [01. Course Intro](01-rxjs-course-intro.md)
 - [02. Use reactive, RxJS based solutions for complex problems](02-rxjs-use-reactive-rxjs-based-solutions-for-complex-problems.md)
 - [03. Break down a requirement into small problems](03-rxjs-break-down-a-requirement-into-small-problems.md)
 - [04. Pipe events to numbers and maintain a running count using the scan operator](04-rxjs-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator.md)
