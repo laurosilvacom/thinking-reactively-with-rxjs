@@ -2,11 +2,9 @@
 
 <p align="center"><img src="https://d2eip9sf3oo6c2.cloudfront.net/series/square_covers/000/000/447/full/EGH_ThinkingRxJs.png" width="300"/></p>
 
-In this course, you will use RxJS to build a loading spinner in an app that meets the ever-changing requirements from a mock Product Manager.
-
-You'll also learn how to implement a "Konami Code" style feature that listens for a correct sequence of keys to be typed in a set amount of time.
-
-Follow the thought process that Rares uses as he breaks problems down into manageable pieces that remain flexible, and become more comfortable solving problems reactively.
+- In this course, **you will use RxJS to build a loading spinner in an app** that meets the ever-changing requirements from a mock Product Manager.
+- You'll also learn how to **implement a "Konami Code" style feature** that listens for a correct sequence of keys to be typed in a set amount of time.
+- Follow the thought process that Rares uses as he **breaks problems down into manageable pieces that remain flexible**, and become more comfortable solving problems reactively.
 
 ## Outcomes
 
@@ -52,4 +50,4 @@ Follow the thought process that Rares uses as he breaks problems down into manag
 
 ## Contribute
 
-These are community notes that I hope everyone who studies benefits from. If you notice areas that could be improved please feel free to open a PR!
+- These are community notes that I hope everyone who studies benefits from. If you notice areas that could be improved please feel free to open a PR!
