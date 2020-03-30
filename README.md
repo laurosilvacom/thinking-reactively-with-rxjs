@@ -1,6 +1,6 @@
 <h1 align="center"><a href="https://egghead.io/courses/thinking-reactively-with-rxjs">Thinking Reactively with RxJS</a></h1>
 
-<p align="center"><img src="https://d2eip9sf3oo6c2.cloudfront.net/series/square_covers/000/000/447/full/EGH_ThinkingRxJs.png" width="200"/></p>
+<p align="center"><img src="https://d2eip9sf3oo6c2.cloudfront.net/series/square_covers/000/000/447/full/EGH_ThinkingRxJs.png" width="300"/></p>
 
 In this course, you will use RxJS to build a loading spinner in an app that meets the ever-changing requirements from a mock Product Manager.
 
