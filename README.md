@@ -50,4 +50,5 @@
 
 ## Contribute
 
-- These are community notes that I hope everyone who studies benefits from. If you notice areas that could be improved please feel free to open a PR!
+- These are community notes that I hope everyone who studies benefits from.
+- If you notice areas that could be improved please **feel free to open a PR**!
